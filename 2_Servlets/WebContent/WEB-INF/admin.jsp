@@ -19,6 +19,7 @@
 				<td>${user.id}</td>
 				<td>${user.name}</td>
 				<td>${user.email}</td>
+				<td><a href="user?name=${user.name}">Go to user page</a></td>
 			</tr>
 		</c:forEach>
 	</table>

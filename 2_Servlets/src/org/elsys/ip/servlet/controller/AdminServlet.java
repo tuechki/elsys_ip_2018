@@ -1,4 +1,4 @@
-package org.elsys.ip.servlet;
+package org.elsys.ip.servlet.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.elsys.ip.servlet.service.UserService;
+
 /**
  * Servlet implementation class AdminServlet
  */
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private UserService userService = new UserService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,16 +40,9 @@ public class AdminServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		request.setAttribute("users", getUsers());	
+		request.setAttribute("users", userService.getUsers());	
 		getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp")
 			.forward(request, response);
-	}
-	
-	private List<User> getUsers() {
-		List<User> users =new ArrayList<>();
-		users.add(new User(1, "admin", "admin@admin.bg"));
-		users.add(new User(2, "user", "user@user.bg"));
-		return users;
 	}
 
 }

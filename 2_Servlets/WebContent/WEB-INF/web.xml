@@ -3,7 +3,7 @@
 	<display-name>2_Servlets</display-name>
 	<servlet>
 		<servlet-name>AdminServlet</servlet-name>
-		<servlet-class>org.elsys.ip.servlet.AdminServlet</servlet-class>
+		<servlet-class>org.elsys.ip.servlet.controller.AdminServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>AdminServlet</servlet-name>
@@ -12,10 +12,10 @@
 	
 	<servlet>
 		<servlet-name>UserServlet</servlet-name>
-		<servlet-class>org.elsys.ip.servlet.UserServlet</servlet-class>
+		<servlet-class>org.elsys.ip.servlet.controller.UserServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
-		<url-pattern>/user</url-pattern>
+		<url-pattern>/user/*</url-pattern>
 	</servlet-mapping>
 </web-app>
