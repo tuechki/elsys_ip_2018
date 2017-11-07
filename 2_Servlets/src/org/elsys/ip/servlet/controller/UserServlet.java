@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.elsys.ip.servlet.model.User;
+import org.elsys.ip.servlet.models.User;
 import org.elsys.ip.servlet.service.UserService;
 
 /**
@@ -34,14 +34,11 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
 		User user = userService.getByName(request.getParameter("name"));
-		if (user != null) {
-			out.print("Welcome, " + user.getName()+ ". Your email is: " + user.getEmail());
-		} else {
-			out.println("Welcome, anonymous.");
-		}
-		out.close();
+		request.setAttribute("user", user);
+		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
+				.forward(request, response);
 	}
 
 	/**
@@ -54,4 +51,25 @@ public class UserServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	protected void doUpdate(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		User user = userService.getByName(request.getParameter("name"));
+
+		if(request.getParameter("name") != null){
+			user.setName(request.getParameter("name"));
+		}
+
+		if(request.getParameter("email") != null){
+			user.setMail(request.getParameter("mail"));
+		}
+
+
+
+
+		request.setAttribute("user", user);
+		getServletContext().getRequestDispatcher("/WEB-INF/user.jsp")
+				.forward(request, response);
+	}
 }

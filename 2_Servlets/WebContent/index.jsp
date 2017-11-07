@@ -12,11 +12,28 @@
 	<c:if test="${error != null}">
 		<p>${error}</p>
 	</c:if>
-	<form action="admin" method="POST">
-		Name: <input type="text" name="name"/><br />
-		Password: <input type="password" name="password"/><br />
-		<input type="submit" value="login"/>
-	</form>
+
+
+	<c:choose>
+		<c:when test="${rank != null}">
+			<form action="admin" method="POST">
+				Name: <input type="text" name="name"/><br />
+				Password: <input type="password" name="password"/><br />
+				<input type="submit" value="login"/>
+			</form>
+		</c:when>
+		<c:otherwise>
+			<form action="user" method="POST">
+				Name: <input type="text" name="name"/><br />
+				Password: <input type="password" name="password"/><br />
+				<input type="submit" value="login"/>
+			</form>
+		</c:otherwise>
+	</c:choose>
+
+
+
+
 
 </body>
 </html>

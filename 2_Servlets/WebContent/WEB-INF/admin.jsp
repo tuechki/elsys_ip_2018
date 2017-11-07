@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+		<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,7 +19,13 @@
 				<td>${user.id}</td>
 				<td>${user.name}</td>
 				<td>${user.email}</td>
-				<td><a href="user?name=${user.name}">Go to user page</a></td>
+				<%--<td><a href="user?name=${user.name}">Go to user page</a></td>--%>
+				<td>
+					<form action="user" method="GET">
+						<input type="submit" value="User's page"/>
+					</form>
+				</td>
+
 			</tr>
 		</c:forEach>
 	</table>
