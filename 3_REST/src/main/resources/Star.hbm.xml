@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+   
+
+<hibernate-mapping>
+  <class name="org.elsys.ip.rest.model.Star" table="stars">
+    <id name="id" type="integer">
+      <column name="id" />
+      <generator class="identity" />
+    </id>
+    <property name="name" type="string">
+      <column name="name" length="50"/>
+    </property>
+    <property name="mass" type="long">
+      <column name="mass"/>
+    </property>
+    <property name="evolutionaryStage" type="string">
+      <column name="evolutionaryStage" length="15"/>
+    </property>
+    <property name="volume" type="long">
+      <column name="volume"/>
+    </property>
+    <property name="escapeVelocity" type="integer">
+      <column name="escapeVelocity"/>
+    </property>
+    <property name="age" type="long">
+      <column name="age"/>
+    </property>
+    <property name="distanceFromEarth" type="long">
+      <column name="distanceFromEarth"/>
+    </property>
+    <property name="spectralType" type="string">
+      <column name="spectralType" length="30"/>
+    </property>
+    <property name="temperature" type="long">
+      <column name="temperature"/>
+    </property>
+    <property name="equatorialRadius" type="long">
+      <column name="equatorialRadius"/>
+    </property>
+  </class>
+</hibernate-mapping>
