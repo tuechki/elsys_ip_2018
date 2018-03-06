@@ -6,6 +6,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import org.elsys.ip.rest.persistence.HibernateUtil;
+import org.hibernate.Session;
 
 import static org.elsys.ip.rest.repository.StarPredicates.hasName;
 
@@ -23,37 +25,64 @@ public class StarRepository {
             ));
 
     public List<Star> getStarList() {
-        return starList;
+      
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        List<Star> stars = session.createQuery("FROM Stars").list();
+        session.getTransaction().commit();
+        return stars;
+        
     }
+    
+    
 
     public Optional<Star> getStarById(Integer id) {
-        return starList.stream().filter(star -> star.getId() == id).findFirst();
+       // return starList.stream().filter(star -> star.getId() == id).findFirst();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Star star = session.get(Star.class, id);
+        session.getTransaction().commit();
+        
+        return star;
     }
 
-    public List<Star> getStarByName(String name) {
-        return starList.stream().filter(star -> star.getName().equals(name)).collect(Collectors.toList());
-    }
+//     public List<Star> getStarByName(String name) {
+//         return starList.stream().filter(star -> star.getName().equals(name)).collect(Collectors.toList());
+//     }
+    
 
     public Star saveStar(Star star) {
-        starList.add(star);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(star);
+        session.getTransaction().commit();
+        
         return star;
     }
 
     public List<Star> saveStars(List<Star> stars) {
         for(Star star : stars){
-            starList.add(star);
+            saveStar(star);
         }
 
         return stars;
     }
-    public Star updateStar(Integer id, Star star) {
-        int realId = id - 1;
-        starList.set(realId, star);
+    public Star updateStar(Star star) {
+//         int realId = id - 1;
+//         starList.set(realId, star);
+//         return star;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.update(star);
+        session.getTransaction().commit();
         return star;
     }
-
+    
     public void deleteStar(Integer id) {
-        starList.removeIf(it -> it.getId() == id);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.delete(getStarById(id));
+        session.getTransaction().commit();
     }
 
 
